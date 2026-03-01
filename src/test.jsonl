@@ -1,0 +1,5 @@
+{ "url": "https://thehackernews.com/2026/01/critical-wordpress-modular-ds-plugin.html", "type": "static", "image": [] }
+{ "url": "https://www.crowdstrike.com/en-us/blog/how-crowdstrike-detects-malware-at-machine-speed/", "type": "dynamic", "image": [] }
+{ "url": "https://thehackernews.com/2026/02/critical-n8n-flaw-cve-2026-25049.html", "type": "static", "image": ["//div[@id='articlebody']//img"] }
+{ "url": "https://thehackernews.com/2026/02/china-linked-dknife-aitm-framework.html", "type": "static", "image": ["//div[@id='articlebody']//img"] }
+{ "url": "https://thehackernews.com/2026/02/hackers-exploit-react2shell-to-hijack.html", "type": "static", "image": ["//div[@id='articlebody']//img"] }

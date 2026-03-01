@@ -1,0 +1,35 @@
+
+A maximum-severity security flaw in a WordPress plugin called Modular DS has come under active exploitation in the wild, according to Patchstack.
+
+The vulnerability, tracked as CVE-2026-23550 (CVSS score: 10.0), has been described as a case of unauthenticated privilege escalation impacting all versions of the plugin prior to and including 2.5.1. It has been patched in version 2.5.2. The plugin has more than 40,000 active installs.
+
+"In versions 2.5.1 and below, the plugin is vulnerable to privilege escalation, due to a combination of factors including direct route selection, bypassing of authentication mechanisms, and auto-login as admin," Patchstack said.
+
+The problem is rooted in its routing mechanism, which is designed to put certain sensitive routes behind an authentication barrier. The plugin exposes its routes under the "/api/modular-connector/" prefix.
+However, it has been found that this security layer can be bypassed every time the "direct request" mode is enabled by supplying an "origin" parameter set to "mo" and a "type" parameter set to any value (e.g., "origin=mo&type=xxx"). This causes the request to be treated as a Modular direct request.
+
+"Therefore, as soon as the site has already been connected to Modular (tokens present/renewable), anyone can pass the auth middleware: there is no cryptographic link between the incoming request and Modular itself," Patchstack explained.
+
+"This exposes several routes, including /login/, /server-information/, /manager/, and /backup/, which allow various actions to be performed, ranging from remote login to obtaining sensitive system or user data."
+
+As a result of this loophole, an unauthenticated attacker can exploit the "/login/{modular_request}" route to get administrator access, resulting in privilege escalation. This could then pave the way for a full site compromise, permitting an attacker to introduce malicious changes, stage malware, or redirect users to scams.
+
+According to details shared by the WordPress security company, attacks exploiting the flaw are said to have been first detected on January 13, 2026, at around 2 a.m. UTC, with HTTP GET calls to the endpoint "/api/modular-connector/login/" followed by attempts to create an admin user.
+
+The attacks have originated from the following IP addresses -
+
+    45.11.89[.]19
+    185.196.0[.]11
+
+In light of active exploitation of CVE-2026-23550, users of the plugin are advised to update to a patched version as soon as possible.
+"This vulnerability highlights how dangerous implicit trust in internal request paths can be when exposed to the public internet," Patchstack said.
+
+"In this case, the issue was not caused by a single bug, but by several design choices combined together: URL-based route matching, a permissive 'direct request' mode, authentication based only on the site connection state, and a login flow that automatically falls back to an administrator account."
+
+Modular DS is also recommending users to review their sites for signs of compromise, such as unexpected admin users or suspicious requests from automated scanners, and, if found, perform the steps below -
+
+    Regenerate WordPress salts to invalidate all existing sessions
+    Regenerate OAuth credentials
+    Scan the site for malicious plugins, files, or code
+
+"The vulnerability was located in a custom routing layer extending Laravel’s route matching functionality," the maintainers of the plugin said. "The route matching logic was overly permissive, allowing crafted requests to match protected endpoints without proper authentication validation."

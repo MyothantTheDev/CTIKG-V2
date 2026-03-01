@@ -1,0 +1,146 @@
+A new, critical security vulnerability has been disclosed in the n8n
+workflow automation platform that, if successfully exploited, could
+result in the execution of arbitrary system commands.
+The flaw, tracked as CVE-2026-25049 (CVSS score: 9.4), is the result of inadequate sanitization that bypasses safeguards put in place to address CVE-2025-68613 (CVSS score: 9.9), another critical defect that was patched by n8n in December 2025.
+"Additional exploits in the expression evaluation of n8n have been
+identified and patched following CVE-2025-68613," n8n's maintainers said in an advisory released Wednesday.
+"An authenticated user with permission to create or modify workflows
+could abuse crafted expressions in workflow parameters to trigger
+unintended system command execution on the host running n8n."
+The issue affects the following versions -
+
+<1.123.17 (Fixed in 1.123.17)
+<2.5.2 (Fixed in 2.5.2)
+As many as 10 security researchers, including Fatih Çelik, who
+reported the original bug CVE-2025-68613, as well as Endor Labs' Cris
+Staicu, Pillar Security's Eilon Cohen, and SecureLayer7's Sandeep
+Kamble, have been acknowledged for discovering the shortcoming.
+In a technical deep-dive
+ expounding CVE-2025-68613 and CVE-2026-25049, Çelik said "they could be
+ considered the same vulnerability, as the second one is just a bypass
+for the initial fix," adding how they allow an attacker to escape the
+n8n expression sandbox mechanism and get around security checks.
+"An attacker creates a workflow with a publicly accessible webhook that has no authentication enabled," SecureLayer7 said.
+ "By adding a single line of JavaScript using destructuring syntax, the
+workflow can be abused to execute system-level commands. Once exposed,
+anyone on the internet can trigger the webhook and run commands
+remotely."
+
+Successful exploitation of the vulnerability could allow an attacker
+to compromise the server, steal credentials, and exfiltrate sensitive
+data, not to mention open up opportunities for threat actors to install
+persistent backdoors to facilitate long-term access.
+The cybersecurity company also noted that the severity of the flaw
+significantly increases when it's paired with n8n's webhook feature,
+permitting an adversary to create a workflow using a public webhook and
+add a remote code execution payload to a node in the workflow, causing
+the webhook to be publicly accessible once the workflow is activated.
+
+Pillar's report has described
+ the issue as permitting an attacker to steal API keys, cloud provider
+keys, database passwords, OAuth tokens, and access the filesystem and
+internal systems, pivot to connected cloud accounts, and hijack
+artificial intelligence (AI) workflows.
+"The attack requires nothing special. If you can create a workflow, you can own the server," Cohen said.
+Endor Labs, which also shared details of the vulnerability, said the
+problem arises from gaps in n8n's sanitization mechanisms that allow for
+ bypassing security controls.
+"The vulnerability arises from a mismatch between TypeScript's
+compile-time type system and JavaScript's runtime behavior," Staicu explained.
+ "While TypeScript enforces that a property should be a string at
+compile time, this enforcement is limited to values that are present in
+the code during compilation."
+"TypeScript cannot enforce these type checks on runtime
+attacker-produced values. When attackers craft malicious expressions at
+runtime, they can pass non-string values (such as objects, arrays, or
+symbols) that bypass the sanitization check entirely."
+If immediate patching is not an option, users are advised to follow
+the workarounds below to minimize the impact of potential exploitation -
+
+Restrict workflow creation and editing permissions to fully trusted users only
+Deploy n8n in a hardened environment with restricted operating system privileges and network access
+"This vulnerability demonstrates why multiple layers of validation
+are crucial. Even if one layer (TypeScript types) appears strong,
+additional runtime checks are necessary when processing untrusted
+input," Endor Labs said. "Pay special attention to sanitization
+functions during code review, looking for assumptions about input types
+that aren't enforced at runtime."
+Besides CVE-2026-25049, n8n has also released security alerts for 11
+other flaws, including five that are rated critical in severity -
+
+CVE-2026-21893
+ (CVSS score: 9.4) - A command injection vulnerability that allows
+authenticated users with administrative permissions to execute arbitrary
+ system commands on the n8n host under specific conditions (Fixed in
+version 1.120.3)
+CVE-2026-25051
+ (CVSS score: 8.5) - A cross-site scripting (XSS) vulnerability in the
+handling of webhook responses and related HTTP endpoints that allows an
+authenticated user with permission to create or modify workflows to
+execute malicious scripts with same-origin privileges when other users
+interact with the crafted workflow, potentially leading to session
+hijacking and account takeover (Fixed in version 1.123.2)
+CVE-2026-25052
+ (CVSS score: 9.4) - A Time-of-check Time-of-use (TOCTOU) vulnerability
+in the file access controls that allows authenticated users with
+permission to create or modify workflows to read sensitive files from
+the n8n host system, potentially leading to a complete account takeover
+of any user on the instance (Fixed in versions 2.5.0 and 1.123.18)
+CVE-2026-25053 (CVSS score: 9.4) - An operating system command injection vulnerability
+ in the Git node that allows authenticated users with permission to
+create or modify workflows to execute arbitrary system commands or read
+arbitrary files on the n8n host (Fixed in versions 2.5.0 and 1.123.10)
+CVE-2026-25054
+ (CVSS score: 8.5) - A stored cross-site scripting (XSS) vulnerability
+affecting a markdown rendering component used in n8n's interface,
+including workflow sticky notes, that allows an authenticated user with
+permission to create or modify workflows to execute scripts with
+same-origin privileges when other users interact with a maliciously
+crafted workflow, potentially leading to session hijacking and account
+takeover (Fixed in versions 2.2.1 and 1.123.9)
+CVE-2026-25055
+ (CVSS score: 7.1) - A path traversal vulnerability that allows files to
+ be written to unintended locations on remote systems when workflows
+process uploaded files and transfer them to remote servers via the SSH
+node without validating their metadata, potentially leading to remote
+code execution on those systems (Fixed in versions 2.4.0 and 1.123.12)
+CVE-2026-25056
+ (CVSS score: 9.4) - A vulnerability in the Merge node's SQL Query mode
+that allows authenticated users with permission to create or modify
+workflows to write arbitrary files to the n8n server's filesystem,
+potentially leading to remote code execution (Fixed in versions 2.4.0
+and 1.118.0)
+CVE-2026-25115
+ (CVSS score: 9.4) - A vulnerability in the Python Code node that allows
+ authenticated users to break out of the Python sandbox environment and
+execute code outside the intended security boundary when Task Runners
+are enabled using N8N_RUNNERS_ENABLED=true, Python is enabled
+N8N_PYTHON_ENABLED=true, and Code Node is enabled (Fixed in version
+2.4.8)
+CVE-2026-25631
+ (CVSS score: 5.3) - An improper credential domain validation
+vulnerability in the HTTP Request node that allows an authenticated
+attacker to send requests with credentials to unintended domains,
+potentially leading to credential exfiltration (Fixed in version
+1.121.0)
+CVE-2025-61917
+ (CVSS score: 7.7) - An unsafe buffer allocation vulnerability that
+allows exposure of sensitive information to unauthorized actor,
+potentially leading to exposure of sensitive information when Task
+Runners are enabled using N8N_RUNNERS_ENABLED=true and Code Node is
+enabled (Fixed in version 1.114.3)
+CVE-2025-62726
+ (CVSS score: 8.8) - A remote code execution vulnerability exists in the
+ Git Node component that allows attackers to execute arbitrary code
+within the n8n environment when a remote repository containing a
+pre-commit hook is cloned, causing the hook to be executed following the
+ use of the Commit operation in the Git Node (Fixed in version 1.113.0)
+Given the criticality of the identified vulnerabilities, Users are
+recommended to update their instances to the latest version for optimal
+protection.
+"n8n's flexibility and power are exactly what make these issues high impact," Upwind security researcher Amit Genkin said.
+ "When automation engines are allowed to directly influence execution
+and file access, small mistakes quickly turn into full environment
+compromise."
+(The story was updated after publication to include additional insights published by security researcher Fatih Çelik.)
+Found this article interesting?  Follow us on Google News, Twitter and LinkedIn to read more exclusive content we post.

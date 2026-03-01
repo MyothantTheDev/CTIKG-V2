@@ -1,0 +1,24 @@
+Cybersecurity researchers have disclosed details of an active web traffic hijacking campaign that has targeted NGINX installations and management panels like Baota (BT) in an attempt to route it through the attacker's infrastructure.
+
+Datadog Security Labs said it observed threat actors associated with the recent React2Shell (CVE-2025-55182, CVSS score: 10.0) exploitation using malicious NGINX configurations to pull off the attack.
+
+"The malicious configuration intercepts legitimate web traffic between users and websites and routes it through attacker-controlled backend servers," security researcher Ryan Simon said. "The campaign targets Asian TLDs (.in, .id, .pe, .bd, .th), Chinese hosting infrastructure (Baota Panel), and government and educational TLDs (.edu, .gov)."
+The activity involves the use of shell scripts to inject malicious configurations into NGINX, an open-source reverse proxy and load balancer for web traffic management. These "location" configurations are designed to capture incoming requests on certain predefined URL paths and redirect them to domains under the attackers' control via the "proxy_pass" directive.
+The scripts are part of a multi-stage toolkit that facilitates persistence and the creation of malicious configuration files incorporating the malicious directives to redirect web traffic. The components of the toolkit are listed below -
+
+    zx.sh, which acts as the orchestrator to execute subsequent stages through legitimate utilities like curl or wget. In the event that the two programs are blocked, it creates a raw TCP connection to send an HTTP request
+    bt.sh, which targets the Baota (BT) Management Panel environment to overwrite NGINX configuration files
+    4zdh.sh, which enumerates common Nginx configuration locations and takes steps to minimize errors when creating the new configuration
+    zdh.sh, which adopts a narrower targeting approach by focusing mainly on Linux or containerized NGINX configurations and targeting top-level domains (TLDs) such as .in and .id
+    ok.sh, which is responsible for generating a report detailing all active NGINX traffic hijacking rules
+
+"The toolkit contains target discovery and several scripts designed for persistence and the creation of malicious configuration files containing directives intended to redirect web traffic," Datadog said.
+
+Simon told The Hacker News via email that there are no additional details or attribution that it can share about the threat actors behind the campaign. However, the researcher assessed with "moderate confidence" that they obtained initial access following the exploitation of React2Shell.
+The disclosure comes as GreyNoise said two IP addresses – 193.142.147[.]209 and 87.121.84[.]24 – account for 56% of all observed exploitation attempts two months after React2Shell was publicly disclosed. A total of 1,083 unique source IP addresses have been involved in React2Shell exploitation between January 26 and February 2, 2026.
+
+"The dominant sources deploy distinct post-exploitation payloads: one retrieves cryptomining binaries from staging servers, while the other opens reverse shells directly to the scanner IP," the threat intelligence firm said. "This approach suggests interest in interactive access rather than automated resource extraction."
+
+It also follows the discovery of a coordinated reconnaissance campaign targeting Citrix ADC Gateway and Netscaler Gateway infrastructure using tens of thousands of residential proxies and a single Microsoft Azure IP address ("52.139.3[.]76") to discover login panels.
+
+"The campaign ran two distinct modes: a massive distributed login panel discovery operation using residential proxy rotation, and a concentrated AWS-hosted version disclosure sprint," GreyNoise noted. "They had complementary objectives of both finding login panels, and enumerating versions, which suggests coordinated reconnaissance."

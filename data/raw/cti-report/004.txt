@@ -1,0 +1,35 @@
+Cybersecurity researchers have taken the wraps off a gateway-monitoring and adversary-in-the-middle (AitM) framework dubbed DKnife that's operated by China-nexus threat actors since at least 2019.
+
+The framework comprises seven Linux-based implants that are designed to perform deep packet inspection, manipulate traffic, and deliver malware via routers and edge devices. Its primary targets seem to be Chinese-speaking users, an assessment based on the presence of credential harvesting phishing pages for Chinese email services, exfiltration modules for popular Chinese mobile applications like WeChat, and code references to Chinese media domains.
+
+"DKnife's attacks target a wide range of devices, including PCs, mobile devices, and Internet of Things (IoT) devices," Cisco Talos researcher Ashley Shen noted in a Thursday report. "It delivers and interacts with the ShadowPad and DarkNimbus backdoors by hijacking binary downloads and Android application updates."
+
+The cybersecurity company said it discovered DKnife as part of its ongoing monitoring of another Chinese threat activity cluster codenamed Earth Minotaur that's linked to tools like the MOONSHINE exploit kit and the DarkNimbus (aka DarkNights) backdoor. Interestingly, the backdoor has also been put to use by a third China-aligned advanced persistent threat (APT) group called TheWizards.
+An analysis of DKnife's infrastructure has uncovered an IP address hosting WizardNet, a Windows implant deployed by TheWizards via an AitM framework referred to as Spellbinder. Details of the toolkit were documented by ESET in April 2025.
+
+The targeting of Chinese-speaking users, Cisco said, hinges on the discovery of configuration files obtained from a single command-and-control (C2) server, raising the possibility that there could be other servers hosting similar configurations for different regional targeting.
+
+This is significant in light of infrastructural connections between DKnife and WizardNet, as TheWizards is known to target individuals and the gambling sector across Cambodia, Hong Kong, Mainland China, the Philippines, and the United Arab Emirates.
+Unlike WizardNet, DKnife is engineered to be run on Linux-based devices. Its modular architecture enables operators to serve a wide range of functions, ranging from packet analysis to traffic manipulation. Delivered by means of an ELF downloader, it contains seven different components -
+
+    dknife.bin - The central nervous system of the framework responsible for deep packet inspection, user activities reporting, binary download hijacking, and DNS hijacking
+    postapi.bin - A data reporter module that acts as a relay by receiving traffic from DKnife and reporting to remote C2
+    sslmm.bin - A reverse proxy module modified from HAProxy that performs TLS termination, email decryption, and URL rerouting
+    mmdown.bin - An updater module that connects to a hard-coded C2 server to download APKs used for the attack
+    yitiji.bin - A packet forwarder module that creates a bridged TAP interface on the router to host and route attacker-injected LAN traffic
+    remote.bin - A peer-to-peer (P2P) VPN client module that creates a communication channel to remote C2
+    dkupdate.bin - An updater and watchdog module that keeps the various components alive
+
+"DKnife can harvest credentials from a major Chinese email provider and host phishing pages for other services," Talos said. "For harvesting email credentials, the sslmm.bin component presents its own TLS certificate to clients, terminates and decrypts POP3/IMAP connections, and inspects the plaintext stream to extract usernames and passwords."
+
+"Extracted credentials are tagged with 'PASSWORD,' forwarded to the postapi.bin component, and ultimately relayed to remote C2 servers."
+The core component of the framework is "dknife.bin," which takes care of deep packet inspection, allowing operators to conduct traffic monitoring campaigns ranging from "covert monitoring of user activity to active in-line attacks that replace legitimate downloads with malicious payloads." This includes -
+
+    Serving updated C2 to Android and Windows variants of DarkNimbus malware
+    Conducting Domain Name System (DNS)-based hijacking over IPv4 and IPv6 to facilitate malicious redirects for JD.com-related domains
+    Hijacking and replacing Android application updates associated with Chinese news media, video streaming, image editing apps, e-commerce platforms, taxi-service platforms, gaming, and pornography video streaming apps by intercepting their update manifest requests
+    Hijacking Windows and other binary downloads based on certain pre-configured rules to deliver via DLL side-loading the ShadowPad backdoor, which then loads DarkNimbus
+    Interfering with communications from antivirus and PC-management products, including 360 Total Security and Tencent services
+    Monitoring user activity in real-time and reporting it back to the C2 server by grouping them into broad categories, such as messaging (including voice/video calls, sent texts, received images, in-app article views on Signal and WeChat), shopping, news consumption, map searches, video streaming, gaming, dating, taxi and rideshare requests, and email checking.
+
+"Routers and edge devices remain prime targets in sophisticated targeted attack campaigns," Talos said. "As threat actors intensify their efforts to compromise this infrastructure, understanding the tools and TTPs they employ is critical. The discovery of the DKnife framework highlights the advanced capabilities of modern AitM threats, which blend deep‑packet inspection, traffic manipulation, and customized malware delivery across a wide range of device types."

@@ -1,0 +1,81 @@
+How CrowdStrike’s Malware Analysis Agent Detects Malware at Machine Speed
+The capabilities of the Malware Analysis Agent, now generally available, helped CrowdStrike achieve 100% Detection in the 2025 MITRE ATT&CK Enterprise Evaluations.
+
+At Fal.Con 2025, CrowdStrike introduced Threat AI, an agentic threat intelligence system of autonomous agents that reason across data, hunt for threats, and take action. As part of our vision for the agentic SOC, these AI-powered agents automate complex intelligence workflows so defenders can keep up with AI-powered adversaries while staying in control of every decision.
+This vision takes a concrete step forward with the first two agents, both available to customers of CrowdStrike Falcon® Adversary Intelligence Premium. The Malware Analysis Agent automates a critical analyst workflow by turning malicious files into actionable intelligence and adaptive defenses, while the Hunt Agent translates CrowdStrike’s deep adversary knowledge into always-on, hypothesis-driven threat hunts with verified leads. 
+This blog focuses on the Malware Analysis Agent and how it revolutionizes malware investigations.
+Malware Analysis in the MITRE ATT&CK Evaluation
+
+The same core technologies that power the Malware Analysis Agent played a central role in CrowdStrike’s performance in the 2025 MITRE ATT&CK® Enterprise Evaluations, where CrowdStrike achieved 100% detection and 100% protection with zero false positives. These results, in the industry's most demanding and comprehensive cross-domain security assessment to date, reflect how the CrowdStrike Falcon® platform and CrowdStrike threat intelligence worked together to uncover and stop advanced adversary tradecraft.
+In one evaluation scenario, the adversary embedded encoded shellcode within their malware so it could evade security products, then reflectively loaded and executed that shellcode at runtime. CrowdStrike’s static and dynamic analysis capabilities quickly investigated files of interest and delivered precise intelligence that was automatically converted into detections and protections through CrowdStrike Falcon® Fusion SOAR, without analyst involvement. CrowdStrike Falcon® Adversary Intelligence’s integrated static analysis capabilities triages files, extracts configurations, identifies code relationships, and correlates samples to known malware families, while dynamic sandbox detonations provide rich behavioral intelligence by observing real execution.
+Together, these capabilities transform suspicious files into actionable intelligence and detections within seconds, enabling rapid triage, adversary attribution, and automated defense aligned to adversary TTPs. The Malware Analysis Agent brings these capabilities together in a single agent, enabling defenders to detect malware at machine speed.
+AI-Powered Malware Analysis at Speed and Scale
+Traditional Malware Analysis Is Slow and Difficult
+
+When a suspicious file appears, security analysts must answer critical questions: Is it malicious? What does it do? How do we stop it? Does it indicate a broader campaign or targeted activity? Getting these answers often takes hours of manual work, multiple tools, and expertise many organizations lack.
+
+Typical file investigations start with a detection through endpoint detection and response (EDR), email attachment, or an incident response investigation. Most teams begin with a hash lookup using an IOC feed or access an open source malware repository to determine verdict and priority. If it is a unique sample, or only limited context is available, they may send it through a malware analysis sandbox and then to a reverse engineer, if they have one. The analyst would spend hours picking through decompiled code, searching derivative artifacts across databases and feeds, accessing memory dumps, attributing to a malware family or adversary, hunting for related samples, and building a remediation plan. 
+
+This isn’t scalable. Dynamic malware analysis alone takes about 15 minutes or more. Multiply that across hundreds of files from dozens of daily detections, and it’s at least a day of waiting on the analysis of artifacts that may not even be malicious. In this situation, scaling malware analysis across the detection stack to generate environment-specific intelligence is practically impossible, and many detection artifacts are never analyzed because of ingestion cost and time.
+The Malware Analysis Agent Reduces SOC Time and Effort
+
+The Malware Analysis Agent uses AI to orchestrate CrowdStrike's malware analysis tools, which embed finished intelligence to help detect and understand novel threats and respond within minutes. 
+
+Analysts have three options for providing data to the Malware Analysis Agent:
+
+Manually load files into the agent within the Falcon platform
+Programmatically integrate the agent with third-party detection tools and different EDR-centric workflows with Falcon Fusion SOAR or via API
+Configure prevention policies to automatically upload suspicious files from sensors to the cloud for analysis 
+
+Every step of the agent’s analysis is logged so analysts have full transparency into what was done and why.
+Figure 1. The Malware Analysis Agent provides threat classification, malware family identification, and detailed behavioral analysis, combining multiple tools into actionable intelligence.
+Under the Hood: How It Works
+
+The Malware Analysis Agent replaces the manual process of analyzing malware with a single orchestrated workflow, automatically kicking off deeper investigation whenever a suspicious file is identified.
+
+The agent then coordinates analysis across multiple tools, performing static and dynamic analysis in parallel. It examines the file’s structure and code patterns, detonates the file in our  secure sandbox to observe runtime behavior, identifies similar samples within our extensive malware repository, and matches patterns against CrowdStrike’s extensive signature database of over 5,000 YARA rules.
+
+Powered by a multi-tool architecture that runs without human intervention, the agent compresses hours of investigation into minutes and synthesizes the outputs into a consolidated report with malware family classification, threat level, behavioral summaries of key capabilities, related threat actor context, and clear remediation recommendations.
+
+Below is a breakdown of that process:
+
+Step 1: Automated file identification and upload
+
+When the “Suspicious file QuickScan Pro” analysis prevention policy is enabled, the Falcon sensor automatically flags potentially suspicious files based on behavioral heuristics and machine learning models, then securely uploads them to CrowdStrike's cloud.
+
+Step 2: Initial static analysis and enrichment
+
+The agent then performs rapid static analysis to examine file structure, embedded strings, and code patterns. At the same time, the system queries CrowdStrike's threat intelligence database to enrich the analysis with information about similar files, known campaigns, and threat actor attribution.
+
+Step 3: Dynamic behavioral analysis
+
+The agent triggers CrowdStrike’s secure sandbox to execute the file in a controlled environment, where it captures runtime behavior including network communications, file system modifications, registry changes, and process interactions.
+
+Step 4: Pattern matching and classification
+
+The system matches observed characteristics against CrowdStrike's YARA rule repository to identify specific malware families and variants. 
+
+Step 5: Similar sample identification
+
+Using malware search index capabilities, the agent performs content-based analysis to find related malware samples in CrowdStrike's repository (over 8.5 billion samples), where it compares code structure and behavioral patterns to identify variants and related families.
+
+Step 6: Summarization of findings
+
+The agent then synthesizes findings from every stage into a unified report with confidence-scored classifications, behavioral summaries, and remediation recommendations.
+
+Step 7: Action
+
+Once triggered, the agent kicks off retroactive threat hunting and deploys monitoring rules, while executing countermeasures such as isolating affected systems, exporting IOCs, and blocking command-and-control (C2) infrastructure.
+
+This orchestrated approach replaces hours of manual analysis with an automated workflow that delivers expert-level insights in minutes, enabling security teams to handle higher alert volumes while maintaining consistent analysis quality.
+Figure 2. The Malware Analysis Agent orchestrates multiple specialized tools to deliver comprehensive threat intelligence in minutes.
+Integrate Existing Security Tools for Greater ROI
+
+CrowdStrike’s Malware Analysis Agent can integrate with existing security tools, including leading email security solutions like Proofpoint, Abnormal, and Mimecast, or third-party EDR providers. This enables security teams to generate a common intelligence picture in the Falcon platform from across a variety of detection tooling and coordinate a faster and more comprehensive response to known and unknown threats.
+Empowering the Agentic SOC 
+
+Today’s adversaries are exploring AI-powered attacks and adapting faster than human teams can respond. Legacy threat intelligence tools weren’t built to handle these threats.
+
+With the Malware Analysis Agent and Hunt Agent, CrowdStrike is accelerating critical processes and giving security teams the tools and expertise to defend at machine speed. When put to the test in the 2025 MITRE ATT&CK Enterprise Evaluations, these agent capabilities demonstrated their power to counter advanced adversary techniques.
+
+CrowdStrike is committed to continuous innovation. We are developing cutting-edge AI capabilities, expanding adversary intelligence coverage, and evolving the Falcon platform to help keep our customers ahead of emerging threats.
