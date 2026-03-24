@@ -1,0 +1,34 @@
+Germany's Federal Office for the Protection of the Constitution (aka Bundesamt für Verfassungsschutz or BfV) and Federal Office for Information Security (BSI) have issued a joint advisory warning of a malicious cyber campaign undertaken by a likely state-sponsored threat actor that involves carrying out phishing attacks over the Signal messaging app.
+
+"The focus is on high-ranking targets in politics, the military, and diplomacy, as well as investigative journalists in Germany and Europe," the agencies said. "Unauthorized access to messenger accounts not only allows access to confidential private communications but also potentially compromises entire networks."
+
+A noteworthy aspect of the campaign is that it does not involve the distribution of malware or the exploitation of any security vulnerability in the privacy-focused messaging platform. Rather, the end goal is to weaponize its legitimate features to obtain covert access to a victim's chats, along with their contact lists.
+
+The attack chain is as follows: the threat actors masquerade as "Signal Support" or a support chatbot named "Signal Security ChatBot" to initiate direct contact with prospective targets, urging them to provide a PIN or verification code received via SMS, or risk facing data loss.
+Should the victim comply, the attackers can register the account and gain access to the victim's profile, settings, contacts, and block list through a device and mobile phone number under their control. While the stolen PIN does not enable access to the victim's past conversations, a threat actor can use it to capture incoming messages and send messages posing as the victim.
+
+That target user, who has by now lost access to their account, is then instructed by the threat actor disguised as the support chatbot to register for a new account.
+
+There also exists an alternative infection sequence that takes advantage of the device linking option to trick victims into scanning a QR code, thereby granting the attackers access to the victim's account, including their messages for the last 45 days, on a device managed by them.
+
+In this case, however, the targeted individuals continue to have access to their account, little realizing that their chats and contact lists are now also exposed to the threat actors. 
+
+The security authorities warned that while the current focus of the campaign appears to be Signal, the attack can also be extended to WhatsApp since it also incorporates similar device linking and PIN features as part of two-step verification.
+"Successful access to messenger accounts not only allows confidential individual communications to be viewed, but also potentially compromises entire networks via group chats," BfV and BSI said.
+
+While it's not known who is behind the activity, similar attacks have been orchestrated by multiple Russia-aligned threat clusters tracked as Star Blizzard, UNC5792 (aka UAC-0195), and UNC4221 (aka UAC-0185), per reports from Microsoft and Google Threat Intelligence Group early last year.
+
+In December 2025, Gen Digital also detailed another campaign codenamed GhostPairing, where cybercriminals have resorted to the device linking feature on WhatsApp to seize control of accounts to likely impersonate users or commit fraud.
+
+To stay protected against the threat, users are advised to refrain from engaging with support accounts and entering their Signal PIN as a text message. A crucial line of defense is to enable Registration Lock, which prevents unauthorized users from registering a phone number on another device. It's also advised to periodically review the list of linked devices and remove any unknown devices.
+
+The development comes as the Norwegian government accused the Chinese-backed hacking groups, including Salt Typhoon, of breaking into several organizations in the country by exploiting vulnerable network devices, while also calling out Russia for closely monitoring military targets and allied activities, and Iran for keeping tabs on dissidents.
+
+Stating that Chinese intelligence services attempt to recruit Norwegian nationals to gain access to classified data, the Norwegian Police Security Service (PST) noted that these sources are then encouraged to establish their own "human source" networks by advertising part-time positions on job boards or approaching them via LinkedIn.
+The agency further warned that China is "systematically" exploiting collaborative research and development efforts to strengthen its own security and intelligence capabilities. It's worth noting that Chinese law requires software vulnerabilities identified by Chinese researchers to be reported to the authorities no later than two days after discovery.
+
+"Iranian cyber threat actors compromise email accounts, social media profiles, and private computers belonging to dissidents to collect information about them and their networks," PST said. "These actors have advanced capabilities and will continue to develop their methods to conduct increasingly targeted and intrusive operations against individuals in Norway."
+
+The disclosures also follow an advisory from CERT Polska, which assessed that a Russian nation-state hacking group called Static Tundra is likely behind coordinated cyber attacks targeted at more than 30 wind and photovoltaic farms, a private company from the manufacturing sector, and a large combined heat and power plant (CHP) supplying heat to almost half a million customers in the country.
+
+"In each affected facility, a FortiGate device was present, serving as both a VPN concentrator and a firewall," it said. "In every case, the VPN interface was exposed to the internet and allowed authentication to accounts defined in the configuration without multi‑factor authentication."

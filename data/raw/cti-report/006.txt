@@ -1,0 +1,26 @@
+The distributed denial-of-service (DDoS) botnet known as AISURU/Kimwolf has been attributed to a record-setting attack that peaked at 31.4 Terabits per second (Tbps) and lasted only 35 seconds.
+
+Cloudflare, which automatically detected and mitigated the activity, said it's part of a growing number of hyper-volumetric HTTP DDoS attacks mounted by the botnet in the fourth quarter of 2025. The attack took place in November 2025.
+
+AISURU/Kimwolf has also been linked to another DDoS campaign codenamed The Night Before Christmas that commenced on December 19, 2025. Per Cloudflare, the average size of the hyper-volumetric DDoS attacks during the campaign was 3 billion packets per second (Bpps), 4 Tbps, and 54 requests per second (Mrps), with the maximum rates touching 9 Bpps, 24 Tbps, and 205 Mrps.
+"DDoS attacks surged by 121% in 2025, reaching an average of 5,376 attacks automatically mitigated every hour," Cloudflare's Omer Yoachimik and Jorge Pacheco said. "In 2025, the total number of DDoS attacks more than doubled to an incredible 47.1 million."
+
+The web infrastructure company noted that it mitigated 34.4 million network-layer DDoS attacks in 2025, compared to 11.4 million in 2024. In Q4 2025 alone, network-layer DDoS attacks accounted for 78% of all DDoS attacks. Put together, the number of DDoS attacks surged by 31% over the previous quarter and 58% over 2024.
+
+In 2025 Q4, hyper-volumetric attacks increased by 40% compared to the previous quarter, witnessing a jump from 1,304 to 1,824. A total of 717 attacks were recorded in Q1 2025. The spike in the number of attacks has been complemented by an uptick in the size of these attacks, growing by over 700% compared to the large attacks seen in late 2024.
+AISURU/Kimwolf has ensnared more than 2 million Android devices, most of which are compromised, off-brand Android TVs, into its botnet, often by tunneling through residential proxy networks like IPIDEA. Last month, Google disrupted the proxy network and initiated legal action to take down dozens of domains used to control devices and proxy traffic through them.
+
+It also partnered with Cloudflare to disrupt IPIDEA's domain resolution, impacting their ability to command and control infected devices and market their products.
+
+“As part of the Google-led disruption effort, Cloudflare participated by suspending access to many accounts and domains that were misusing its infrastructure," Cloudflare told The Hacker News over email. "Threat actors were attempting to distribute malware and provide markets for people seeking access to the network of illicit residential proxies."
+
+IPIDEA is assessed to have enrolled devices using at least 600 trojanized Android apps that embedded various proxy software development kits (SDKs), and over 3,000 trojanized Windows binaries posing as OneDriveSync or Windows updates. Furthermore, the Beijing-based company has advertised several VPN and proxy apps that silently turned users' Android devices into proxy exit nodes without their knowledge or consent.
+What's more, the operators have been found to run at least a dozen residential proxy businesses that masquerade as legitimate services. Behind the scenes, all these offerings are connected to a centralized infrastructure that's under the control of IPIDEA.
+
+Some of the other noteworthy trends observed by Cloudflare during Q4 2025 are as follows -
+
+    Telecommunications, service providers, and carriers emerged as the most attacked sector, followed by information technology, gambling, gaming, and computer software verticals.
+    China, Hong Kong, Germany, Brazil, the U.S., the U.K., Vietnam, Azerbaijan, India, and Singapore were the most attacked countries.
+    Bangladesh surpassed Indonesia to become the largest source of DDoS attacks. Other top sources included Ecuador, Indonesia, Argentina, Hong Kong, Ukraine, Vietnam, Taiwan, Singapore, and Peru.
+
+"DDoS attacks are rapidly growing in sophistication and size, surpassing what was previously imaginable," Cloudflare said. "This evolving threat landscape presents a significant challenge for many organizations to keep pace. Organizations currently relying on on-premise mitigation appliances or on-demand scrubbing centers may benefit from re-evaluating their defense strategy."
